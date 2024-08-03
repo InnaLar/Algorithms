@@ -6,30 +6,23 @@ import java.util.Arrays;
 @SuppressWarnings({"UncommentedMain", "ExecutableStatementCount"})
 public class ArraySquaring {
 
-    public static void squaring(final int[] intArray) {
-        int item;
-        int posItem = -1;
-        boolean foundPos = false;
-        for (int i = 0; i < intArray.length; i++) {
-            item = intArray[i];
-            if (!foundPos && item >= 0) {
-                posItem = i;
-                foundPos = true;
-            }
-            intArray[i] = (int) Math.pow(item, 2);
-        }
-        reverseArray(intArray, posItem);
-        int j = posItem;
-
-        while (posItem > 0) {
-            if (intArray[0] > intArray[j]) {
-                shift(intArray, j);
-                j++;
+    public static int[] squaring(final int[] intArray) {
+        int leftPointer = 0;
+        final int lengthArray = intArray.length;
+        int rightPointer = lengthArray - 1;
+        final int[] anotherArray = new int[lengthArray];
+        int j = lengthArray - 1;
+        while (leftPointer != rightPointer) {
+            if (Math.abs(intArray[leftPointer]) > Math.abs(intArray[rightPointer])) {
+                anotherArray[j] = (int) Math.pow(intArray[leftPointer], 2);
+                leftPointer++;
             } else {
-                shift(intArray, j - 1);
+                anotherArray[j] = (int) Math.pow(intArray[rightPointer], 2);
+                rightPointer--;
             }
-            posItem--;
+            j--;
         }
+        return anotherArray;
     }
 
     public static void reverseArray(final int[] intArray, final int endPos) {
@@ -43,15 +36,15 @@ public class ArraySquaring {
     }
 
     public static void main(final String[] args) {
-        final int[] intArray = {-7, -4, -2, -1, 0, 3, 5, 15};
+        //final int[] intArray = {-7, -4, -2, -1, 0, 3, 5, 15};
         //final int[] intArray = { 0, 3, 5, 15};
         //final int[] intArray = { -5, -4, -3, -2, -1, 0, 6};
-        //final int[] intArray = { -5, -4, -3, -2, -1};
+        final int[] intArray = {-5, -4, -3, -2, -1};
         System.out.println(Arrays.toString(intArray));
         //squaring(intArray);
         //System.out.println(Arrays.toString(intArray));
         //System.out.println(n);
-        System.out.println(Arrays.toString(anotherSquaring(intArray)));
+        System.out.println(Arrays.toString(squaring(intArray)));
     }
 
     public static void shift(final int[] intArray, final int targetPos) {

@@ -5,7 +5,7 @@ import java.security.InvalidParameterException;
 @SuppressWarnings("uncommentedmain")
 public class Palindrome {
     public static void main(final String[] args) {
-        final String word = "n123";
+        final String word = "n12321n";
         System.out.println(word);
         System.out.println(wordReversed(word));
         if (isPalindrom(word)) {
@@ -21,7 +21,12 @@ public class Palindrome {
         if (lengthWord < 2) {
             throw new InvalidParameterException("Аргумент должен состоять хотя бы из 2 символов.");
         }
-        return word.equals(wordReversed(word));
+        for (int i = 0; i < lengthWord / 2; i++) {
+            if (word.charAt(i) != word.charAt(lengthWord - i - 1)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static String wordReversed(final String word) {
@@ -33,4 +38,5 @@ public class Palindrome {
         }
         return new String(charArrayReversed);
     }
+
 }
