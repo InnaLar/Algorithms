@@ -4,37 +4,34 @@ import java.util.Arrays;
 
 @SuppressWarnings("uncommentedmain")
 public class TwoSortedArraysIntoOne {
-    private static int[] combineTwoSortedArrays(final int[] firstSortedIntArray, final int[] secondSortedIntArray) {
+    private static int[] combineTwoSortedArrays(final int[] arr1, final int[] arr2) {
         int i = 0;
         int j = 0;
         int k = 0;
-        final int resultSize = firstSortedIntArray.length + secondSortedIntArray.length;
-        final int[] resultIntArray = new int[resultSize];
-        while (i < firstSortedIntArray.length || j < secondSortedIntArray.length) {
-            if (i == firstSortedIntArray.length) {
-                for (int l = k; l < resultSize; l++) {
-                    resultIntArray[l] = secondSortedIntArray[j];
-                    j++;
-                }
-                continue;
-            }
-            if (j == firstSortedIntArray.length) {
-                for (int l = k; l < resultSize; l++) {
-                    resultIntArray[l] = firstSortedIntArray[i];
-                    i++;
-                }
-                continue;
-            }
-            if (firstSortedIntArray[i] < secondSortedIntArray[j]) {
-                resultIntArray[k] = firstSortedIntArray[i];
+        final int resultSize = arr1.length + arr2.length;
+        final int[] result = new int[resultSize];
+
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] < arr2[j]) {
+                result[k] = arr1[i];
                 i++;
             } else {
-                resultIntArray[k] = secondSortedIntArray[j];
+                result[k] = arr2[j];
                 j++;
             }
             k++;
         }
-        return resultIntArray;
+        while (i < arr1.length) {
+            result[k] = arr1[i];
+            i++;
+            k++;
+        }
+        while (j < arr2.length) {
+            result[k] = arr2[j];
+            j++;
+            k++;
+        }
+        return result;
     }
 
     public static void main(final String[] args) {
