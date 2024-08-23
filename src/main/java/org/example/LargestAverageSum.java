@@ -12,7 +12,7 @@ public class LargestAverageSum {
             sum += nums[i];
         }
         res = 1.0 * sum / k;
-        for (int right = k; right < nums.length; right++){
+        for (int right = k; right < nums.length; right++) {
             sum = sum + nums[right] - nums[right - k];
             res = Math.max(res, 1.0 * sum / k);
         }
