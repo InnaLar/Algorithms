@@ -3,19 +3,21 @@ package org.example;
 //int[] arr = { 1, 13, 2, 15, 5, 88, 1, 8} int target = 30
 @SuppressWarnings("uncommentedmain")
 public class MaxSubSequenceSumTarget {
-    public static int lengthMaxSubSequence(final int[] nums, final int target) {
+    public static int lengthMaxSubSequence(final int[] arr, final int target) {
         int res = 0;
         int cnt = 0;
         int left = 0;
         int sum = 0;
-        for (int right = 0; right < nums.length; right++) {
-            sum += nums[right];
+        int curr = 0;
+        while (curr < arr.length) {
+            sum += arr[curr];
             cnt++;
-            while (sum > target) {
-                sum -= nums[left];
+            if (sum > target) {
+                sum -= arr[left];
                 cnt--;
                 left++;
             }
+            curr++;
             res = Math.max(res, cnt);
         }
         return res;
